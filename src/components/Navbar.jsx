@@ -32,7 +32,7 @@ const Navbar = () => {
         <div
           className={`${
             navOpen ? "left-0" : "-left-[100%] lg:left-0"
-          } h-screen absolute text-black w-2/3 lg:relative top-0 lg:h-fit flex flex-col justify-center lg:justify-start lg:flex-row items-center gap-10 lg:gap-5 bg-white lg:bg-transparent transition-all duration-300`}
+          } h-screen fixed text-black w-2/3 lg:relative top-0 lg:h-fit flex flex-col justify-center lg:justify-start lg:flex-row items-center gap-10 lg:gap-5 bg-white lg:bg-transparent transition-all duration-300`}
         >
           {links.map((lnk, index) => (
             <NavLink
@@ -47,7 +47,7 @@ const Navbar = () => {
               {lnk.name}
             </NavLink>
           ))}
-          <div className="lg:ms-auto">
+          <div className="lg:ms-auto mt-10 lg:mt-0">
             <Link className="bg-[#fccab8] p-3 rounded text-black font-semibold">
               Contact Us
             </Link>
