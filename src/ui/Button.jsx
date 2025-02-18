@@ -5,7 +5,7 @@ const Button = ({ destination, text }) => {
   return (
     <Link
       to={destination}
-      className="rounded bg-[#FCCAB8] px-5 py-3 text-lg font-semibold"
+      className="rounded bg-[#FCCAB8] px-5 py-3 lg:text-lg font-semibold"
     >
       {text}
     </Link>
