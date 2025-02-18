@@ -1,6 +1,7 @@
 import React from "react";
 import { CgFacebook } from "react-icons/cg";
 import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -23,14 +24,14 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="bg-[#fccab8] px-[5%] lg:px-[10%] py-20 ">
+    <footer className="bg-[#fccab8] px-[5%] lg:px-[10%] py-20 lg:py-14">
       <div className="2xl:container mx-auto grid lg:grid-cols-3">
         <div className=" flex justify-center lg:py-10">
           <div className="grid place-content-center uppercase rounded-full border-[15px] lg:border-[#fccab8] h-[200px] w-[200px] my-auto">
             <p className="text-4xl font-bold">salon</p>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center gap-5  lg:gap-2 mt-20">
+        <div className="flex flex-col justify-center items-center gap-5 lg:gap-2 mt-20 lg:mt-0">
           {links.map((lnk, index) => (
             <Link key={index} to={lnk.link} className="font-semibold">
               {lnk.name}
@@ -53,7 +54,15 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="font-bold"></p>
+      <div className="smallFont text-sm py-5 text-center mt-10 lg:mt-0">
+        <p className="font-bold">Built by Victor Jack</p>
+        <p className="flex gap-2 justify-center">
+          <a href="https://x.com/iamvictorjack" className="mt-2 p-4">
+            {" "}
+            <FaXTwitter />{" "}
+          </a>
+        </p>
+      </div>
     </footer>
   );
 };
