@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 
-const ServiceSelection = () => {
+const ServiceSelection = ({ onComplete }) => {
   const [selectedService, setSelectedService] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,6 +14,7 @@ const ServiceSelection = () => {
   const handleSelect = (service) => {
     setSelectedService(service);
     setIsOpen(false);
+    onComplete();
   };
 
   return (

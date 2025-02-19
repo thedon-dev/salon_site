@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export const DateAndTime = () => {
+const DateAndTime = ({ onComplete }) => {
+  useEffect(() => {
+    onComplete();
+  }, []);
+
   return <div>DateAndTime</div>;
 };
+
+export default DateAndTime;
