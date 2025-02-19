@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BiX } from "react-icons/bi";
 import { FaBars } from "react-icons/fa6";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const links = [
@@ -15,19 +15,33 @@ const Navbar = () => {
     },
     {
       name: "Service Menu",
-      link: "servicemenu",
+      link: "/servicemenu",
     },
     {
       name: "Our Story",
-      link: "ourstory",
+      link: "/ourstory",
     },
   ];
+
   const [navOpen, setNavOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <nav className="px-[5%] lg:px-[10%] absolute text-white w-full left-0 text-sm">
-      <div className="2xl:container mx-auto flex justify-between items-center border-b-4 border-white py-5">
-        <div className="">
-          <Link className="p-2 font-sans text-xl">Salon</Link>
+      <div
+        className={`${
+          isHomePage ? "border-white" : "border-black"
+        } 2xl:container mx-auto flex justify-between items-center border-b-4  py-5`}
+      >
+        <div>
+          <Link
+            className={`${
+              isHomePage ? "text-white" : "text-black"
+            } p-2 font-sans text-xl font-semibold`}
+          >
+            Salon
+          </Link>
         </div>
         <div
           className={`${
@@ -38,15 +52,21 @@ const Navbar = () => {
             <NavLink
               key={index}
               to={lnk.link}
+              onClick={() => setNavOpen(false)}
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#fccab8] px-2 py-1"
-                  : "text-black lg:text-white px-2 py-1"
+                  ? isHomePage
+                    ? "text-[#fccab8] px-2 py-1"
+                    : "text-black px-2 py-1"
+                  : isHomePage
+                  ? "text-black lg:text-white px-2 py-1"
+                  : "text-gray-500 px-2 py-1"
               }
             >
               {lnk.name}
             </NavLink>
           ))}
+
           <div className="lg:ms-auto mt-10 lg:mt-0">
             <Link className="bg-[#fccab8] p-3 rounded text-black font-semibold">
               Contact Us
@@ -56,7 +76,9 @@ const Navbar = () => {
 
         <button
           onClick={() => setNavOpen(!navOpen)}
-          className="block lg:hidden"
+          className={`${
+            isHomePage ? "text-white" : "text-black"
+          } block lg:hidden`}
         >
           {navOpen ? <BiX size={45} /> : <FaBars size={30} />}
         </button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import mainbg from "../assets/salon_background.png";
 import { Link } from "react-router-dom";
 import Button from "../ui/Button";
@@ -25,6 +25,10 @@ const HomePage = () => {
     { name: "Skincare", image: skincare },
     { name: "Facial", image: facial },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <section
