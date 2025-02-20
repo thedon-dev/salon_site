@@ -93,7 +93,10 @@ const Navbar = () => {
           ))}
 
           <div className="lg:ms-auto mt-10 lg:mt-0">
-            <Link className="bg-[#fccab8] p-3 rounded text-black font-semibold">
+            <Link
+              to="/contactus"
+              className="bg-[#fccab8] p-3 rounded text-black font-semibold"
+            >
               Contact Us
             </Link>
           </div>

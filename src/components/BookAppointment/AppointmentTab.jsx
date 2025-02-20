@@ -55,6 +55,7 @@ const AppointmentTab = () => {
       //   handleSubmit();
       //   RequestSent(() => setCurrentDisplay(0));
       setRequestSent(true);
+      setCurrentDisplay(null);
     }
   };
 
