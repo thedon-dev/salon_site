@@ -9,7 +9,7 @@ import {
 import ServiceSelection from "./ServiceSelection";
 import DateAndTime from "./DateAndTime";
 import YourInformation from "./YourInformation";
-import bookedSuccess from "../../assets/bookedSuccessful.png";
+import bookedSuccess from "../../assets/BookedSuccessful.png";
 
 const RequestSent = ({ restart }) => (
   <div className="flex flex-col items-center justify-center py-20">
