@@ -12,15 +12,18 @@ import YourInformation from "./YourInformation";
 import bookedSuccess from "../../assets/BookedSuccessful.png";
 
 const RequestSent = ({ restart }) => (
-  <div className="flex flex-col items-center justify-center py-20">
-    {/* <h2 className="text-xl font-bold text-green-600">🎉 Request Sent!</h2>
-    <p className="mt-2 text-gray-600 text-center">
-      Your appointment request has been submitted successfully.
-    </p> */}
-
+  <div className="flex flex-col items-center justify-center py-5">
     <div>
       <img src={bookedSuccess} alt="" className="w-[100px]" />
     </div>
+    <h2 className="text-lg font-bold text-green-600 mt-3">🎉 Request Sent!</h2>
+    <p className="mt-2 text-gray-600 text-center">
+      Your appointment request has been submitted successfully.
+    </p>
+
+    {/* <p className="mt-2 text-gray-600 text-center">
+      Your appointment request has been submitted successfully.
+    </p> */}
     <button
       onClick={restart}
       className="mt-10 cursor-pointer bg-black text-white px-5 py-2 rounded"
