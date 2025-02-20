@@ -31,3 +31,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #fde4db;
 }
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+}

@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useAtom } from "jotai";
+import { userInfoAtom } from "../../utils/atoms"; // Import Jotai atom
 
-const YourInformation = ({ onComplete }) => {
-  const [data, setData] = useState({
-    Name: "",
-    Email: "",
-    PhoneNumber: "",
-  });
-  const [allDataFilled, setAllDataFilled] = useState(false);
+const YourInformation = () => {
+  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
 
   const handleChange = (e) => {
-    setData((prev) => ({
+    setUserInfo((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
-  useEffect(() => {
-    const allFilled = Object.values(data).every((value) => value.trim() !== "");
-    if (allFilled) {
-      setAllDataFilled(true);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (allDataFilled) {
-      onComplete();
-    }
-  }, [allDataFilled]);
 
   return (
     <div>
@@ -37,7 +21,7 @@ const YourInformation = ({ onComplete }) => {
         <input
           type="text"
           name="Name"
-          value={data.Name}
+          value={userInfo.Name}
           onChange={handleChange}
           placeholder="Name"
           className="w-full border rounded p-3"
@@ -45,7 +29,7 @@ const YourInformation = ({ onComplete }) => {
         <input
           type="email"
           name="Email"
-          value={data.Email}
+          value={userInfo.Email}
           onChange={handleChange}
           placeholder="Email Address"
           className="w-full border rounded p-3"
@@ -53,7 +37,7 @@ const YourInformation = ({ onComplete }) => {
         <input
           type="tel"
           name="PhoneNumber"
-          value={data.PhoneNumber}
+          value={userInfo.PhoneNumber}
           onChange={handleChange}
           placeholder="Phone Number"
           className="w-full border rounded p-3"

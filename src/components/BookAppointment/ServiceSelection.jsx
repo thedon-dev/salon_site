@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useAtom } from "jotai";
 import { FaAngleDown } from "react-icons/fa6";
+import { selectedServiceAtom } from "../../utils/atoms";
 
-const ServiceSelection = ({ onComplete }) => {
-  const [selectedService, setSelectedService] = useState(null);
+const ServiceSelection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedService, setSelectedService] = useAtom(selectedServiceAtom);
 
   const services = [
     { name: "Haircut", price: "N5,000" },
@@ -14,7 +16,6 @@ const ServiceSelection = ({ onComplete }) => {
   const handleSelect = (service) => {
     setSelectedService(service);
     setIsOpen(false);
-    onComplete();
   };
 
   return (
@@ -29,9 +30,7 @@ const ServiceSelection = ({ onComplete }) => {
         ) : (
           <span className="text-gray-400">Choose a service</span>
         )}
-        <span className="text-gray-600">
-          <FaAngleDown />
-        </span>
+        <FaAngleDown className="text-gray-600" />
       </div>
 
       {selectedService && (

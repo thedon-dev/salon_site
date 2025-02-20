@@ -1,4 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { useAtom } from "jotai";
+import {
+  selectedServiceAtom,
+  selectedDateAtom,
+  selectedTimeAtom,
+  userInfoAtom,
+} from "../../utils/atoms";
 import ServiceSelection from "./ServiceSelection";
 import DateAndTime from "./DateAndTime";
 import YourInformation from "./YourInformation";
@@ -20,42 +27,24 @@ const RequestSent = ({ restart }) => (
 
 const AppointmentTab = () => {
   const [currentDisplay, setCurrentDisplay] = useState(0);
-  const [formCompleted, setFormCompleted] = useState([false, false, false]);
   const [requestSent, setRequestSent] = useState(false);
-  //   const [completed, setCompleted] = useState(false);
 
-  const buttons = [
-    {
-      name: "Service Selection",
-      component: (
-        <ServiceSelection onComplete={() => updateFormStatus(0, true)} />
-      ),
-    },
-    {
-      name: "Date & Time",
-      component: <DateAndTime onComplete={() => updateFormStatus(1, true)} />,
-    },
-    {
-      name: "Your Information",
-      component: (
-        <YourInformation onComplete={() => updateFormStatus(2, true)} />
-      ),
-    },
+  const [selectedService, setSelectedService] = useAtom(selectedServiceAtom);
+  const [selectedDate, setSelectedDate] = useAtom(selectedDateAtom);
+  const [selectedTime, setSelectedTime] = useAtom(selectedTimeAtom);
+  const [userInfo] = useAtom(userInfoAtom);
+
+  const formCompleted = [
+    !!selectedService,
+    !!selectedDate && !!selectedTime,
+    Object.values(userInfo).every((value) => value.trim() !== ""),
   ];
 
-  function updateFormStatus(index, status) {
-    setFormCompleted((prev) => {
-      const updated = [...prev];
-      updated[index] = status;
-      return updated;
-    });
-  }
-
   const nextStep = () => {
-    if (currentDisplay < buttons.length - 1) {
+    if (currentDisplay < 2) {
       setCurrentDisplay(currentDisplay + 1);
     } else {
-      setRequestSent(true);
+      handleSubmit();
     }
   };
 
@@ -67,14 +56,58 @@ const AppointmentTab = () => {
 
   const restartBooking = () => {
     setCurrentDisplay(0);
-    setFormCompleted([false, false, false]);
     setRequestSent(false);
+    setSelectedService(null);
+    setSelectedDate(null);
+    setSelectedTime(null);
   };
+
+  const handleSubmit = async () => {
+    const payload = {
+      service: selectedService,
+      date: selectedDate,
+      time: selectedTime,
+      user: userInfo,
+    };
+
+    console.log("Submitting appointment:", payload);
+
+    try {
+      const response = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setRequestSent(true);
+      } else {
+        console.error("Failed to submit appointment");
+      }
+    } catch (error) {
+      console.error("Error submitting appointment:", error);
+    }
+  };
+
+  const steps = [
+    {
+      name: "Service Selection",
+      component: <ServiceSelection />,
+    },
+    {
+      name: "Date & Time",
+      component: <DateAndTime />,
+    },
+    {
+      name: "Your Information",
+      component: <YourInformation />,
+    },
+  ];
 
   return (
     <div className="rounded-lg shadow-lg flex flex-col lg:flex-row">
       <div className="w-full lg:w-2/5 rounded-t-lg lg:rounded-lg bg-[#FDE4DB] py-10 pb-0 lg:pb-10 lg:py-20 flex items-end lg:items-center justify-start flex-row lg:flex-col px-2 lg:gap-7">
-        {buttons.map((btn, index) => (
+        {steps.map((step, index) => (
           <button
             key={index}
             onClick={() => index <= currentDisplay && setCurrentDisplay(index)}
@@ -87,25 +120,23 @@ const AppointmentTab = () => {
             } rounded-t lg:rounded mt-auto py-3 px-3 lg:px-7 w-1/2 text-nowrap text-xs lg:text-base`}
             disabled={index > currentDisplay}
           >
-            {btn.name}
+            {step.name}
           </button>
         ))}
       </div>
-      {/* Main Content */}
       <div className="relative lg:w-3/5 px-[5%] py-10">
         {requestSent ? (
           <RequestSent restart={restartBooking} />
         ) : (
-          <>{buttons[currentDisplay].component} </>
+          <>{steps[currentDisplay].component}</>
         )}
 
-        {/* Navigation Buttons */}
-        {!requestSent ? (
+        {!requestSent && (
           <div className="bottom-5 w-full border-t-2 flex gap-3 mt-5 justify-end">
             {currentDisplay > 0 && (
               <button
                 onClick={prevStep}
-                className="mt-5 bg-black text-white rounded px-5 py-2"
+                className="mt-5 cursor-pointer bg-black text-white rounded px-5 py-2"
               >
                 Back
               </button>
@@ -115,17 +146,13 @@ const AppointmentTab = () => {
               disabled={!formCompleted[currentDisplay]}
               className={`mt-5 rounded px-5 py-2 ${
                 formCompleted[currentDisplay]
-                  ? "bg-black text-white"
+                  ? "bg-black text-white cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
+              } `}
             >
-              {currentDisplay === buttons.length - 1
-                ? "Submit Request"
-                : "Continue"}
+              {currentDisplay === 2 ? "Submit Request" : "Continue"}
             </button>
           </div>
-        ) : (
-          <></>
         )}
       </div>
     </div>
