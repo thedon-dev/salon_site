@@ -9,16 +9,21 @@ import {
 import ServiceSelection from "./ServiceSelection";
 import DateAndTime from "./DateAndTime";
 import YourInformation from "./YourInformation";
+import bookedSuccess from "../../assets/bookedSuccessful.png";
 
 const RequestSent = ({ restart }) => (
   <div className="flex flex-col items-center justify-center py-20">
-    <h2 className="text-xl font-bold text-green-600">🎉 Request Sent!</h2>
+    {/* <h2 className="text-xl font-bold text-green-600">🎉 Request Sent!</h2>
     <p className="mt-2 text-gray-600 text-center">
       Your appointment request has been submitted successfully.
-    </p>
+    </p> */}
+
+    <div>
+      <img src={bookedSuccess} alt="" className="w-[100px]" />
+    </div>
     <button
       onClick={restart}
-      className="mt-5 bg-black text-white px-5 py-2 rounded"
+      className="mt-10 cursor-pointer bg-black text-white px-5 py-2 rounded"
     >
       Book Another Appointment
     </button>
@@ -44,7 +49,9 @@ const AppointmentTab = () => {
     if (currentDisplay < 2) {
       setCurrentDisplay(currentDisplay + 1);
     } else {
-      handleSubmit();
+      //   handleSubmit();
+      //   RequestSent(() => setCurrentDisplay(0));
+      setRequestSent(true);
     }
   };
 
@@ -62,32 +69,32 @@ const AppointmentTab = () => {
     setSelectedTime(null);
   };
 
-  const handleSubmit = async () => {
-    const payload = {
-      service: selectedService,
-      date: selectedDate,
-      time: selectedTime,
-      user: userInfo,
-    };
+  //   const handleSubmit = async () => {
+  //     const payload = {
+  //       service: selectedService,
+  //       date: selectedDate,
+  //       time: selectedTime,
+  //       user: userInfo,
+  //     };
 
-    console.log("Submitting appointment:", payload);
+  //     console.log("Submitting appointment:", payload);
 
-    try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+  //     try {
+  //       const response = await fetch("/api/appointments", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(payload),
+  //       });
 
-      if (response.ok) {
-        setRequestSent(true);
-      } else {
-        console.error("Failed to submit appointment");
-      }
-    } catch (error) {
-      console.error("Error submitting appointment:", error);
-    }
-  };
+  //       if (response.ok) {
+  //         setRequestSent(true);
+  //       } else {
+  //         console.error("Failed to submit appointment");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error submitting appointment:", error);
+  //     }
+  //   };
 
   const steps = [
     {

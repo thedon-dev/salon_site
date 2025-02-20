@@ -9,13 +9,13 @@ const DateAndTime = () => {
   const [selectedTime, setSelectedTime] = useAtom(selectedTimeAtom);
 
   const businessHours = {
-    start: new Date().setHours(9, 0, 0, 0), // 9:00 AM
-    end: new Date().setHours(16, 0, 0, 0), // 4:00 PM
+    start: new Date().setHours(9, 0, 0, 0),
+    end: new Date().setHours(16, 0, 0, 0),
   };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setSelectedTime(null); // Reset time when date changes
+    setSelectedTime(null);
   };
 
   const handleTimeChange = (time) => {
