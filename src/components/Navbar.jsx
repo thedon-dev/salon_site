@@ -6,7 +6,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 const Navbar = () => {
   const links = [
     { name: "Home", link: "/" },
-    { name: "Book Online", link: "/bookonline" },
+    { name: "Book Online", link: "/bookappointment" },
     { name: "Service Menu", link: "/servicemenu" },
     { name: "Our Story", link: "/ourstory" },
   ];
