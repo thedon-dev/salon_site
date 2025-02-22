@@ -9,8 +9,8 @@ const BookAppointment = () => {
   return (
     <>
       <section className="bg-[#FDE4DB] px-[5%] lg:px-[10%] py-20">
-        <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start">
-          <div className="flex mt-20">
+        <div className="flex flex-col lg:flex-row justify-between items-center ">
+          <div className="flex mt-20 lg:mt-0 ">
             <h1 className="text-4xl lg:text-5xl font-semibold my-auto">
               Book Appointment
             </h1>

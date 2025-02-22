@@ -24,7 +24,7 @@ const Footer = () => {
     },
   ];
   return (
-    <footer className="bg-[#fccab8] px-[5%] lg:px-[10%] py-20 pb-5 lg:pb-20 lg:py-14">
+    <footer className="bg-[#FDE4DB] px-[5%] lg:px-[10%] py-20 pb-5 lg:pb-20 lg:py-14">
       <div className="2xl:container mx-auto grid lg:grid-cols-3">
         <div className=" flex justify-center lg:py-10">
           <div className="grid place-content-center uppercase rounded-full border-[15px] lg:border-[#fccab8] h-[200px] w-[200px] my-auto">

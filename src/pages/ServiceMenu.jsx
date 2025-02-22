@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import HairSection from "../components/ServiceMenu/HairSection";
 import MakeupSection from "../components/ServiceMenu/MakeupSection";
+import ManicureAndPedicure from "../components/ServiceMenu/ManicurePedicure";
+import Skincare from "../components/ServiceMenu/Skincare";
+import Facial from "../components/ServiceMenu/Facial";
 
 const ServiceMenu = () => {
   useEffect(() => {
@@ -20,6 +23,9 @@ const ServiceMenu = () => {
       </section>
       <HairSection />
       <MakeupSection />
+      <ManicureAndPedicure />
+      <Skincare />
+      <Facial />
     </>
   );
 };
